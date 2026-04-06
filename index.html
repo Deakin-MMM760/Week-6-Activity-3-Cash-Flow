@@ -28,10 +28,9 @@
     .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); margin: 0 0 10px; }
     h1 { margin: 0; color: var(--teal-dark); font-size: 34px; line-height: 1.15; }
     .intro { margin: 14px 0 0; max-width: 920px; color: var(--muted); font-size: 16px; }
-    .a1-banner { margin-top: 16px; background: var(--teal-soft); border: 1px solid #a8d8de; border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
-    .a1-banner .banner-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .a1-banner { margin-top: 16px; background: var(--teal-soft); border: 1px solid #a8d8de; border-radius: 14px; padding: 14px 16px; }
     .a1-banner p { margin: 0; font-size: 14px; color: var(--teal-dark); }
-    .a1-banner strong { display: block; margin-bottom: 3px; }
+    .a1-banner strong { display: block; margin-bottom: 3px; font-size: 15px; }
     .producing-box { margin-top: 24px; background: var(--grey-box); border-radius: 16px; padding: 20px 22px; border-left: 6px solid var(--teal); }
     .producing-box h2 { margin: 0 0 10px; font-size: 22px; color: var(--teal-dark); }
     .producing-box p { margin: 8px 0; }
@@ -45,6 +44,12 @@
     .field-note { margin: -4px 0 10px; color: var(--muted); font-size: 14px; }
     .field-tip { margin: -4px 0 10px; color: var(--teal-dark); font-size: 13px; background: var(--teal-soft); border-radius: 8px; padding: 6px 10px; border-left: 3px solid var(--teal); }
     .field-xref { margin: -4px 0 10px; color: #5b3a00; font-size: 13px; background: #fff8ed; border-radius: 8px; padding: 6px 10px; border-left: 3px solid var(--orange); }
+    .stage-banner { margin-top: 16px; background: #f0fafb; border: 1px solid #a8d8de; border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--teal-dark); }
+    .stage-banner strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .planning-callout { background: #fff8ed; border: 1px solid #f3cfac; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+    .planning-callout p { margin: 0; font-size: 14px; color: #6d4f27; }
+    .planning-callout p + p { margin-top: 8px; }
+    .planning-callout strong { color: #7d4b12; }
     input[type="text"], input[type="number"], textarea, select { width: 100%; border: 1px solid #b5c7cd; border-radius: 12px; padding: 12px 14px; font-family: Arial,sans-serif; font-size: 15px; color: var(--text); background: #ffffff; transition: border-color 0.15s, box-shadow 0.15s; }
     input:focus, textarea:focus, select:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,111,121,0.12); outline: none; }
     textarea { min-height: 80px; resize: vertical; }
@@ -124,10 +129,9 @@
     <main class="main-card">
       <p class="eyebrow">MMM760 | Week 6</p>
       <h1>Activity 3 | Cash Flow Projection</h1>
-      <p class="intro">Build a rolling 8-week cash flow projection for your practice business. Enter inflows and outflows using cash dates — when money actually moves, not when it is invoiced. Closing balances calculate automatically and carry forward. Negative weeks are flagged in red.</p>
+      <p class="intro">Build an 8-week cash flow projection for your practice business. Enter inflows and outflows using cash dates — when money actually moves, not when it is invoiced. Closing balances calculate automatically and carry forward. Weeks with a negative closing balance are highlighted.</p>
 
       <div class="a1-banner">
-        <span class="banner-icon">📋</span>
         <p><strong>Bring your Activity 1 figures here</strong> Your monthly revenue total (Activity 1 — Section 2) helps you estimate weekly inflows — divide by 4.3, then adjust for when customers actually pay. Your operating expenses (Activity 1 — Section 4) tell you which fixed costs fall in which week. Open Activity 1 in another tab as a reference.</p>
       </div>
 
@@ -135,7 +139,7 @@
         <h2>What you're producing</h2>
         <p>An 8-week cash flow projection with opening balance, weekly inflows and outflows, net movement, and closing balance.</p>
         <p>Cash dates used throughout — not invoice dates.</p>
-        <p>All negative weeks identified with a specific action proposed for each.</p>
+        <p>All negative weeks identified with a specific action or note for each.</p>
         <p>A reflection on the business's cash flow risk profile.</p>
       </section>
 
@@ -158,16 +162,35 @@
         </div>
         <div style="margin-top:16px;max-width:300px;">
           <label class="field-label" for="openingBalance">Opening cash balance ($)</label>
-          <p class="field-xref">📋 This is the cash in your business bank account at the start of Week 1. If estimating, a micro-firm typically holds 4–8 weeks of fixed costs as a buffer. Check your Activity 1 operating expenses total to calculate that range.</p>
+          <p class="field-note"><strong>Existing:</strong> the cash in your business bank account at the start of Week 1.<br><strong>Planning:</strong> your startup capital — the funds you are bringing in to launch the business. This could be personal savings, a loan drawdown, or a founder contribution.</p>
+          <p class="field-xref">From Activity 1 — Section 4: a useful reference point is 4 to 8 weeks of your total operating expenses. That is the minimum buffer a micro-firm typically needs to operate safely.</p>
           <input type="number" id="openingBalance" placeholder="0.00" step="0.01">
         </div>
+        <div style="margin-top:16px;max-width:480px;">
+          <label class="field-label" for="businessStage">Business stage</label>
+          <p class="field-note">Your answer shapes how to interpret the projection, particularly weeks with negative closing balances.</p>
+          <select id="businessStage">
+            <option value="">Select your situation</option>
+            <option value="existing">Existing business — I have trading history and actual figures</option>
+            <option value="planning">Planning stage — I am developing a business idea</option>
+          </select>
+        </div>
+        <div class="stage-banner" id="stageBanner" style="display:none;"></div>
       </section>
 
       <!-- Section 2 -->
       <section class="section" id="projectionSection">
         <h2>2. Weekly cash flow</h2>
         <p class="section-intro">Complete each week in sequence. Closing balance carries automatically to the next week's opening. Click any week header to expand or collapse it.</p>
-        <p class="field-tip" style="margin-bottom:16px;">Estimating inflows? Divide your Activity 1 monthly revenue by 4.3 for a weekly average — then shift amounts to reflect when customers actually pay (after invoice terms). Estimating outflows? Identify which of your Activity 1 expense items fall in each week — rent is usually fortnightly or monthly; wages weekly; insurance and subscriptions may be quarterly.</p>
+
+        <p class="field-note" style="margin-bottom:8px;"><strong>Existing:</strong> divide your Activity 1 monthly revenue by 4.3 for a weekly average, then shift amounts to reflect when customers actually pay after invoice terms. Identify which operating expenses from Activity 1 fall in which week.<br><strong>Planning:</strong> your first weeks may show little or no inflow — this is normal. Focus on mapping when costs begin to flow out and when you realistically expect your first customer payment to arrive.</p>
+
+        <div class="planning-callout" id="planningCallout" style="display:none;">
+          <p><strong>Planning a new business — how to use this projection</strong></p>
+          <p>Your opening balance is your startup capital. In the early weeks, your closing balance will likely be negative as setup costs and operating expenses flow out before revenue arrives. This is expected and informative — the projection tells you how long your capital will last before you need revenue, and whether the amount you are starting with is sufficient.</p>
+          <p>Use the negative week action field to note whether the shortfall is <em>planned startup spend</em> (expected and accounted for in your opening capital) or an <em>unexpected gap</em> (where your assumptions need to change). Not every negative week is a crisis — but every negative week deserves an explanation.</p>
+        </div>
+
         <div id="weeksContainer"></div>
       </section>
 
@@ -178,12 +201,12 @@
         <div class="two-grid">
           <div>
             <label class="field-label" for="riskPattern">What pattern do you notice?</label>
-            <p class="field-note">Is the risk concentrated in a particular period? Is there a structural cause — slow payments, a large fixed cost hitting in one week?</p>
+            <p class="field-note"><strong>Existing:</strong> is the risk concentrated in a particular period? Is there a structural cause — slow payments, a large cost hitting in one week?<br><strong>Planning:</strong> when does the business first reach a positive closing balance? What assumptions drive that timing, and how sensitive is it to a delay in your first customers?</p>
             <textarea id="riskPattern" placeholder="e.g. Weeks 3 and 4 are the most vulnerable because two large supplier payments fall due while invoiced customers are still within their payment window. This is a structural timing problem — not a revenue problem."></textarea>
           </div>
           <div>
-            <label class="field-label" for="structuralFix">One structural change that would improve cash flow</label>
-            <p class="field-note">A change to payment terms or timing that reduces risk without affecting revenue.</p>
+            <label class="field-label" for="structuralFix">One change that would improve the cash position</label>
+            <p class="field-note"><strong>Existing:</strong> a change to payment terms or timing that reduces risk without affecting revenue.<br><strong>Planning:</strong> a change to the launch plan — more startup capital, earlier revenue, or a lower-cost first stage — that would improve your cash position in the critical early weeks.</p>
             <textarea id="structuralFix" placeholder="e.g. Requesting a 30% deposit on all orders over $500 would bring cash in at the point of order, eliminating the gap between material costs and customer payment."></textarea>
           </div>
         </div>
@@ -198,8 +221,9 @@
         <div class="subtle-box">
           <h3>Quality check</h3>
           <p>Have you used cash dates — not invoice dates — for all inflows?</p>
-          <p>Has every negative week been given a specific action — not just "chase payment"?</p>
-          <p>Does the risk summary identify a structural pattern, not just list individual weeks?</p>
+          <p>Has every negative week been given a specific note or action?</p>
+          <p>Does the risk summary identify a pattern or structural cause — not just list individual weeks?</p>
+          <p>For planning stage: does the projection use conservative revenue assumptions?</p>
         </div>
       </section>
 
@@ -212,7 +236,7 @@
         <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
         <p class="progress-copy" id="progressCopy">0 of 4 sections complete</p>
         <div class="status-list">
-          <div class="status-item"><div class="status-row"><span class="status-name">Context</span><span class="status-text empty" id="statusContext">0 of 3</span></div></div>
+          <div class="status-item"><div class="status-row"><span class="status-name">Context</span><span class="status-text empty" id="statusContext">0 of 4</span></div></div>
           <div class="status-item"><div class="status-row"><span class="status-name">Weekly projection</span><span class="status-text empty" id="statusProjection">0 weeks</span></div></div>
           <div class="status-item"><div class="status-row"><span class="status-name">Risk summary</span><span class="status-text empty" id="statusRisk">0 of 2</span></div></div>
           <div class="status-item"><div class="status-row"><span class="status-name">Reflection</span><span class="status-text empty" id="statusReflection">0 of 1</span></div></div>
@@ -222,7 +246,7 @@
       <section class="sidebar-card benchmark-card">
         <h2>Benchmark helper</h2>
         <p>Use these to estimate realistic weekly inflow and outflow patterns.</p>
-        <a class="bm-link" href="https://www.ato.gov.au/businesses-and-organisations/income-deductions-and-concessions/small-business-benchmarks" target="_blank" rel="noopener">ATO Small Business Benchmarks ↗</a>
+        <a class="bm-link" href="https://www.ato.gov.au/businesses-and-organisations/income-deductions-and-concessions/small-business-benchmarks" target="_blank" rel="noopener">ATO Small Business Benchmarks</a>
         <p style="font-size:12px;color:var(--muted);margin-bottom:6px;"><strong>Typical payment terms by customer type</strong></p>
         <table class="bm-table">
           <thead><tr><th>Customer type</th><th>Typical terms</th></tr></thead>
@@ -231,7 +255,7 @@
             <tr><td>Trades / service</td><td>7–14 days</td></tr>
             <tr><td>Small business</td><td>14–30 days</td></tr>
             <tr><td>Corporate / govt</td><td>30–60 days</td></tr>
-            <tr><td>Subscription / retainer</td><td>Monthly in advance</td></tr>
+            <tr><td>Subscription</td><td>Monthly in advance</td></tr>
           </tbody>
         </table>
         <p style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:6px;"><strong>Common outflow timing</strong></p>
@@ -243,23 +267,24 @@
             <tr><td>Suppliers</td><td>7–30 days after invoice</td></tr>
             <tr><td>Insurance</td><td>Monthly or annually</td></tr>
             <tr><td>ATO / GST (BAS)</td><td>Quarterly</td></tr>
-            <tr><td>Software subs</td><td>Monthly</td></tr>
+            <tr><td>Software subscriptions</td><td>Monthly</td></tr>
           </tbody>
         </table>
         <p class="bm-source">Source: ATO and industry practice. Terms vary by arrangement.</p>
         <div class="bm-resources">
-          <p><a href="https://www.ato.gov.au/businesses-and-organisations/income-deductions-and-concessions/small-business-benchmarks" target="_blank" rel="noopener">ATO cash flow guidance ↗</a></p>
-          <p><a href="https://www.business.gov.au/finance/cash-flow" target="_blank" rel="noopener">business.gov.au — cash flow ↗</a></p>
+          <p><a href="https://business.gov.au/finance/cash-flow" target="_blank" rel="noopener">business.gov.au — cash flow</a></p>
+          <p><a href="https://www.ato.gov.au/businesses-and-organisations/income-deductions-and-concessions/small-business-benchmarks" target="_blank" rel="noopener">ATO cash flow guidance</a></p>
         </div>
       </section>
 
       <section class="sidebar-card helper-card">
         <h2>Before you export</h2>
         <ul>
-          <li>Opening balance entered — use Activity 1 to estimate.</li>
+          <li>Business stage selected.</li>
+          <li>Opening balance entered.</li>
           <li>At least three weeks with both inflows and outflows.</li>
-          <li>All negative weeks have a specific action proposed.</li>
-          <li>Risk summary identifies a structural cause.</li>
+          <li>All negative weeks have a specific note or action.</li>
+          <li>Risk summary identifies a pattern or structural cause.</li>
         </ul>
       </section>
     </aside>
@@ -269,6 +294,11 @@
 <script>
   const STORAGE_KEY = 'mmm760_week6_activity3_cashflow';
   const NUM_WEEKS = 8;
+
+  const STAGE_MESSAGES = {
+    existing: 'You selected <strong>Existing business</strong>. Use actual cash dates from your bank records. A negative week requires a concrete action — not just a note that revenue will eventually arrive.',
+    planning: 'You selected <strong>Planning stage</strong>. Negative closing balances in early weeks are expected as costs flow out before revenue begins. Use the planning callout in Section 2 as your guide. Be honest about when your first customer payment will realistically arrive — optimistic timing is the most common error in startup cash flow projections.'
+  };
 
   function buildWeeks() {
     const container = document.getElementById('weeksContainer');
@@ -280,7 +310,7 @@
         <div class="week-header" id="weekHeader${i}">
           <h3>Week ${i+1}${i===0?' — starting week':''} <span id="weekTag${i}"></span></h3>
           <span class="week-summary" id="weekSummaryLabel${i}">${i===0?'enter opening balance above':'not started'}</span>
-          <span class="week-toggle">▼</span>
+          <span class="week-toggle">&#9660;</span>
         </div>
         <div class="week-body">
           <div>
@@ -307,9 +337,9 @@
             <div class="calc-chip closing" id="chipClosing${i}"><div class="chip-label">Closing balance</div><div class="chip-value" id="calcClosing${i}">$0.00</div></div>
           </div>
           <div class="neg-action" id="negAction${i}" style="display:none;">
-            <label class="field-label" for="negActionText${i}">⚠ Negative week — what action will you take?</label>
-            <p class="field-note">Be specific: accelerate a receivable, delay a discretionary cost, draw from a buffer, arrange a credit facility.</p>
-            <textarea id="negActionText${i}" placeholder="e.g. Contact client for outstanding invoice — request payment before end of week. If not received, draw from $2,000 buffer held in savings."></textarea>
+            <label class="field-label" for="negActionText${i}">Negative week — action or explanation</label>
+            <p class="field-note"><strong>Existing:</strong> what specific action will you take to address this shortfall?<br><strong>Planning:</strong> is this planned startup spend (expected burn) or an unexpected gap? If expected, note it. If unexpected, what assumption needs to change?</p>
+            <textarea id="negActionText${i}" placeholder="Existing: e.g. Contact client for outstanding invoice — request payment before end of week.&#10;Planning: e.g. This is expected pre-revenue burn — setup costs in Week 2 before first customer payment arrives in Week 4."></textarea>
           </div>
         </div>`;
       container.appendChild(card);
@@ -318,6 +348,14 @@
       });
       if (i > 0) card.classList.add('collapsed');
     }
+  }
+
+  function updateStageBanner(){
+    const stage=getText('businessStage');
+    const banner=document.getElementById('stageBanner');
+    const callout=document.getElementById('planningCallout');
+    if(stage&&STAGE_MESSAGES[stage]){banner.innerHTML=STAGE_MESSAGES[stage];banner.style.display='block';}else{banner.style.display='none';}
+    if(callout) callout.style.display=stage==='planning'?'block':'none';
   }
 
   function getNum(id){const el=document.getElementById(id);const v=parseFloat(el?el.value:'');return isNaN(v)?0:v;}
@@ -337,7 +375,7 @@
       document.getElementById(`chipNet${i}`).classList.toggle('negative',net<0);
       document.getElementById(`chipClosing${i}`).classList.toggle('negative',isNeg);
       document.getElementById(`weekCard${i}`).classList.toggle('negative',isNeg&&hasData);
-      document.getElementById(`weekTag${i}`).innerHTML=isNeg&&hasData?'<span class="week-tag tag-negative">⚠ Negative</span>':'';
+      document.getElementById(`weekTag${i}`).innerHTML=isNeg&&hasData?'<span class="week-tag tag-negative">Negative</span>':'';
       document.getElementById(`negAction${i}`).style.display=isNeg&&hasData?'block':'none';
       const sl=document.getElementById(`weekSummaryLabel${i}`);
       sl.textContent=hasData?'Closing: '+fmt(closing):i===0?'enter opening balance above':'not started';
@@ -347,22 +385,23 @@
 
   function updateProgress(){
     recalcCashFlow();
-    const cCtx=['businessName','projectionStart'].filter(id=>getText(id)!=='').length+(getText('openingBalance')!==''?1:0);
+    updateStageBanner();
+    const cCtx=['businessName','projectionStart','businessStage'].filter(id=>getText(id)!=='').length+(getText('openingBalance')!==''?1:0);
     let weeksEntered=0; for(let i=0;i<NUM_WEEKS;i++){if(getNum(`inAmt${i}`)>0||getNum(`outAmt${i}`)>0)weeksEntered++;}
     const cRisk=['riskPattern','structuralFix'].filter(id=>getText(id)!=='').length;
     const cRefl=getText('reflection')!==''?1:0;
-    const sections=[cCtx>=3,weeksEntered>=3,cRisk>=2,cRefl>=1];
+    const sections=[cCtx>=4,weeksEntered>=3,cRisk>=2,cRefl>=1];
     const done=sections.filter(Boolean).length;
     document.getElementById('progressFill').style.width=(done/4*100)+'%';
     document.getElementById('progressCopy').textContent=done+' of 4 sections complete';
-    setStatus('statusContext',cCtx+' of 3',cCtx>=3?'complete':cCtx>0?'progress':'empty');
+    setStatus('statusContext',cCtx+' of 4',cCtx>=4?'complete':cCtx>0?'progress':'empty');
     setStatus('statusProjection',weeksEntered+' of 8 weeks',weeksEntered>=3?'complete':weeksEntered>0?'progress':'empty');
     setStatus('statusRisk',cRisk+' of 2',cRisk>=2?'complete':cRisk>0?'progress':'empty');
     setStatus('statusReflection',cRefl+' of 1',cRefl>=1?'complete':'empty');
   }
 
   function getAllFieldIds(){
-    const ids=['businessName','projectionStart','openingBalance'];
+    const ids=['businessName','projectionStart','openingBalance','businessStage'];
     for(let i=0;i<NUM_WEEKS;i++) ids.push(`inDesc${i}`,`inAmt${i}`,`outDesc${i}`,`outAmt${i}`,`negActionText${i}`);
     ids.push('riskPattern','structuralFix','reflection');
     return ids;
@@ -375,16 +414,17 @@
 
   function exportToWord(){
     saveState();
+    const stageLabel=getText('businessStage')==='existing'?'Existing business':'Planning stage';
     let openingBal=getNum('openingBalance'),weekRows='';
     for(let i=0;i<NUM_WEEKS;i++){
       const inAmt=getNum(`inAmt${i}`),outAmt=getNum(`outAmt${i}`),net=inAmt-outAmt,closing=openingBal+net;
       const negStyle=closing<0?'color:#c0392b;':'';
       weekRows+=`<tr><td style="padding:8px;border:1px solid #b7c7cc;font-weight:700;">Week ${i+1}</td><td style="padding:8px;border:1px solid #b7c7cc;vertical-align:top;font-size:12px;">${escapeHtml(getText(`inDesc${i}`))}</td><td style="padding:8px;border:1px solid #b7c7cc;text-align:right;">${fmt(inAmt)}</td><td style="padding:8px;border:1px solid #b7c7cc;vertical-align:top;font-size:12px;">${escapeHtml(getText(`outDesc${i}`))}</td><td style="padding:8px;border:1px solid #b7c7cc;text-align:right;">${fmt(outAmt)}</td><td style="padding:8px;border:1px solid #b7c7cc;text-align:right;">${fmt(net)}</td><td style="padding:8px;border:1px solid #b7c7cc;text-align:right;font-weight:700;${negStyle}">${fmt(closing)}</td></tr>`;
-      if(closing<0&&(inAmt>0||outAmt>0)){const a=getText(`negActionText${i}`);if(a)weekRows+=`<tr><td colspan="7" style="padding:8px;border:1px solid #b7c7cc;background:#fdf0ef;font-size:12px;color:#c0392b;"><strong>Action Week ${i+1}:</strong> ${escapeHtml(a)}</td></tr>`;}
+      if(closing<0&&(inAmt>0||outAmt>0)){const a=getText(`negActionText${i}`);if(a)weekRows+=`<tr><td colspan="7" style="padding:8px;border:1px solid #b7c7cc;background:#fdf0ef;font-size:12px;color:#c0392b;"><strong>Note — Week ${i+1}:</strong> ${escapeHtml(a)}</td></tr>`;}
       openingBal=closing;
     }
     const docTitle=(getText('businessName')||'Week-6-A3-CashFlow').replace(/[^a-z0-9\-\s]/gi,'').trim().replace(/\s+/g,'-');
-    const content=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head><body style="font-family:Arial,sans-serif;color:#22313a;line-height:1.45;"><h1 style="color:#0b4f57;">MMM760 | Week 6 Activity 3 | Cash Flow Projection</h1><p><strong>Business:</strong> ${escapeHtml(getText('businessName'))} &nbsp;|&nbsp; <strong>Starting:</strong> ${escapeHtml(getText('projectionStart'))} &nbsp;|&nbsp; <strong>Opening balance:</strong> ${fmt(getNum('openingBalance'))}</p><h2 style="color:#0b4f57;margin-top:20px;">8-Week Cash Flow Projection</h2><table style="width:100%;border-collapse:collapse;"><thead><tr><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Week</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Inflows</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">In ($)</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Outflows</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Out ($)</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Net</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Closing</th></tr></thead><tbody>${weekRows}</tbody></table><h2 style="color:#0b4f57;margin-top:20px;">Risk Summary</h2><p><strong>Pattern:</strong><br>${escapeHtml(getText('riskPattern'))}</p><p><strong>Structural fix:</strong><br>${escapeHtml(getText('structuralFix'))}</p><h2 style="color:#0b4f57;margin-top:20px;">Reflection</h2><p>${escapeHtml(getText('reflection'))}</p></body></html>`;
+    const content=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head><body style="font-family:Arial,sans-serif;color:#22313a;line-height:1.45;"><h1 style="color:#0b4f57;">MMM760 | Week 6 Activity 3 | Cash Flow Projection</h1><p><strong>Business:</strong> ${escapeHtml(getText('businessName'))} &nbsp;|&nbsp; <strong>Stage:</strong> ${stageLabel} &nbsp;|&nbsp; <strong>Starting:</strong> ${escapeHtml(getText('projectionStart'))} &nbsp;|&nbsp; <strong>Opening balance:</strong> ${fmt(getNum('openingBalance'))}</p><h2 style="color:#0b4f57;margin-top:20px;">8-Week Cash Flow Projection</h2><table style="width:100%;border-collapse:collapse;"><thead><tr><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Week</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Inflows</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">In ($)</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Outflows</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Out ($)</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Net</th><th style="background:#0b4f57;color:#fff;padding:8px;border:1px solid #0b4f57;">Closing</th></tr></thead><tbody>${weekRows}</tbody></table><h2 style="color:#0b4f57;margin-top:20px;">Risk Summary</h2><p><strong>Pattern:</strong><br>${escapeHtml(getText('riskPattern'))}</p><p><strong>Change that would improve cash position:</strong><br>${escapeHtml(getText('structuralFix'))}</p><h2 style="color:#0b4f57;margin-top:20px;">Reflection</h2><p>${escapeHtml(getText('reflection'))}</p></body></html>`;
     const blob=new Blob(['\ufeff',content],{type:'application/msword'});
     const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=docTitle+'.doc';
     document.body.appendChild(link);link.click();document.body.removeChild(link);URL.revokeObjectURL(link.href);
